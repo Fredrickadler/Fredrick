@@ -4,7 +4,7 @@ export default function DarkModeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    if (localStorage.theme === 'dark') {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
       setDark(true);
     }
@@ -17,7 +17,7 @@ export default function DarkModeToggle() {
   }
 
   return (
-    <button onClick={toggleDark} className="p-2 bg-primary text-white rounded">
+    <button onClick={toggleDark} className="p-2 bg-primary text-white rounded-lg hover:scale-105 transition-transform">
       {dark ? "روشن" : "تاریک"}
     </button>
   )
