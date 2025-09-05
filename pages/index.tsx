@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const products = [
@@ -17,8 +18,12 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <section id="products" className="max-w-6xl mx-auto px-5 py-10 flex flex-wrap justify-center">
-        {products.map((p, idx) => <ProductCard key={idx} {...p} />)}
+      <section id="products" className="max-w-6xl mx-auto px-5 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.map((p, idx) => (
+          <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <ProductCard {...p} />
+          </motion.div>
+        ))}
       </section>
       <Footer />
     </>
